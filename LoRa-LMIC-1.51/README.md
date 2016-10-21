@@ -1,5 +1,12 @@
 LMIC 1.51 port to ESP8266 and Arduino (Atmega 328)
 =====================================================
+(c) C. Batrinu, Oct 2016                                                  
+
+NiceRF SX1276 v1.1 has separete RXEN and TXEN pins to be controlled by external MCU.
+On v2.0 control of antenna switch is integrated by control in the internal chip.
+Should work also with the DRF1276G from Dorji.com
+
+
 (c) M. Westenberg, Feb 11, 2016 
 
 This library implements the LoRaWAN stack for a LoRa network.
