@@ -509,7 +509,9 @@ static void setDrTxpow (u1_t reason, u1_t dr, s1_t pow) {
     
     if( pow != KEEP_TXPOW )
         LMIC.adrTxPow = pow;
-		LMIC.txpow = pow;
+    
+    LMIC.txpow = pow;
+    
     if( LMIC.datarate != dr ) {
         LMIC.datarate = dr;
         DO_DEVDB(LMIC.datarate,datarate);
