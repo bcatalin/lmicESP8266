@@ -134,29 +134,30 @@ void onEvent (ev_t ev) {
     }
 }
 
-void do_send(osjob_t* j){
-	  delay(1);													// XXX delay is added for Serial
-      Serial.print("Time: ");
-      Serial.println(millis() / 1000);
-      // Show TX channel (channel numbers are local to LMIC)
-      Serial.print("Send, txCnhl: ");
-      Serial.println(LMIC.txChnl);
-      Serial.print("Opmode check: ");
-      // Check if there is not a current TX/RX job running
-    if (LMIC.opmode & (1 << 7)) {
+void do_send(osjob_t* j)
+{
+   delay(1);													// XXX delay is added for Serial
+   Serial.print("Time: ");
+   Serial.println(millis() / 1000);
+   // Show TX channel (channel numbers are local to LMIC)
+   Serial.print("Send, txCnhl: ");
+   Serial.println(LMIC.txChnl);
+   Serial.print("Opmode check: ");
+   // Check if there is not a current TX/RX job running
+   if (LMIC.opmode & (1 << 7)) 
+   {
       Serial.println("OP_TXRXPEND, not sending");
-    } 
-	else {
-	
+   } 
+   else 
+   {
+      strcpy((char *) mydata,"{\"Hello\":\"World\"}");
 
-	  strcpy((char *) mydata,"{\"Hello\":\"World\"}");
-
-	  Serial.print("ready to send: "); 
-	  Serial.println((char *)mydata);
-	  LMIC_setTxData2(1, mydata, strlen((char *)mydata), 0);
-    }
-    // Schedule a timed job to run at the given timestamp (absolute system time)
-    os_setTimedCallback(j, os_getTime()+sec2osticks(WAIT_SECS), do_send);
+      Serial.print("ready to send: "); 
+      Serial.println((char *)mydata);
+      LMIC_setTxData2(1, mydata, strlen((char *)mydata), 0);
+   }
+   // Schedule a timed job to run at the given timestamp (absolute system time)
+   os_setTimedCallback(j, os_getTime()+sec2osticks(WAIT_SECS), do_send);
          
 }
 
